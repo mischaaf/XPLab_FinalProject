@@ -1,9 +1,7 @@
-// In this file you can create your own custom view templates
-
-// First we create a custom_views object
+// create a custom_views object
 const custom_views = {};
 
-// We can now add view templates to our custom_views object
+// add view templates
 custom_views.multiple_dropdown = function(config) {
     const multi_dropdown_function = {
         name: config.name,
@@ -75,7 +73,7 @@ custom_views.multiple_dropdown = function(config) {
                 });
 
                 $("#next").on("click", function() {
-                    const RT = Date.now() - startingTime; // measure RT before anything else
+                    const RT = Date.now() - startingTime; // measure reaction times first
                     // clear old timeouts and remove them from the timeout array
                     clearTimeout(window.timeout[0]);
                     window.timeout.shift();
@@ -105,7 +103,7 @@ custom_views.multiple_dropdown = function(config) {
 
             startingTime = Date.now();
 
-            // creates the DOM of the trial view
+            // create DOM of the trial view
             babeUtils.view.createTrialDOM(
                 {
                     pause: config.pause,

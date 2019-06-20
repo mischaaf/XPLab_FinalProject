@@ -1,19 +1,15 @@
-// In this file you initialize and configure your experiment using babeInit
-
+// initialise and configure experiment
 $("document").ready(function() {
-    // prevent scrolling when space is pressed
     window.onkeydown = function(e) {
         if (e.keyCode === 32 && e.target === document.body) {
             e.preventDefault();
         }
     };
 
-    // calls babeInit
-    // in debug mode this returns the babe-object, which you can access in the console of your browser
-    // e.g. >> window.babe_monitor or window.babe_monitor.findNextView()
-    // in all other modes null will be returned
+    /* call babeInit:
+       in debug mode this returns the babe-object, in all other modes it returns null */
     window.babe_monitor = babeInit({
-        // You have to specify all views you want to use in this experiment and the order of them
+        // declaration of all views we use in the experiment in their correct order
         views_seq: [
             intro,
             desktop_distance,
@@ -28,25 +24,23 @@ $("document").ready(function() {
             post_test,
             thanks,
         ],
-        // Here, you can specify all information for the deployment
+
+        // specification of all deployment information
         deploy: {
             experimentID: "INSERT_A_NUMBER",
             serverAppURL: "https://babe-demo.herokuapp.com/api/submit_experiment/",
-            // Possible deployment methods are:
-            // "debug" and "directLink"
-            // As well as "MTurk", "MTurkSandbox" and "Prolific"
             deployMethod: "debug",
             contact_email: "YOUREMAIL@wherelifeisgreat.you",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
         },
-        // Here, you can specify how the progress bar should look like
+        
+        // generate progress bar
         progress_bar: {
             in: [
-                // list the view-names of the views for which you want a progress bar
+                // specify trials for which progress bar is needed
                 rating_scale_object.name,
                 rating_scale_like.name
             ],
-             // Possible styles are "default", "separate" and "chunks"
             style: "separate",
             width: 100
         }
