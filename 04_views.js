@@ -114,10 +114,18 @@ const ishihara = babeViews.view_generator('textbox_input', {
     data: ishihara_trial.ishihara_test,
 });
 
-// initiate Snellen eyesight test
+// initiate eyesight test
 const vision_test = babeViews.view_generator('textbox_input', {
   trials: 1,
   name: 'vision_test',
   trial_type: 'vision_test',
   data: vision_test_trial.vision_test,
+});
+
+// iniate second part of eyesight test ???
+const vision_test_2 = babeViews.view_generator('textbox_input', {
+  trials: 1,
+  name: 'vision_test_2',
+  trial_type: 'vision_test_2',
+  data: vision_test_2_trial.vision_test_2,
 });
