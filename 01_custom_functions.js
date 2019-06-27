@@ -10,25 +10,26 @@ const generateID = function(len) {
     return Array.from(arr, this.dec2hex).join("");
 };
 
-// generate array of all stimuli
+// generate array of all stimuli IDs
 var images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
 
 /* to be able to present the stimuli in a randomised order as prescribed in the paper,
-   we shuffle our stimuli array individually for each trial and simply traverse through the
+   we shuffle our stimuli ID array individually for each block of trials and simply traverse through the
    shuffled array */
 
-// shuffle stimuli array for first trial, using the default shuffle function
+// shuffle stimuli ID array for first trial, using the default shuffle function
 var array_like = _.shuffle(images);
 
-// shuffle stimuli array for second trial, using the default shuffle function
+// shuffle stimuli ID array for second trial, using the default shuffle function
 var array_object = _.shuffle(images);
 
 // initialise empty array for first trial
 trials_like = [];
 
-/* for loop for first trial:
-   traverses through all randomised stimuli images and presents the participant with
-   a rating scale for each image; pushes participant answers onto the first trial array to save them */
+/* for-loop for first trial:
+   traverses through all randomised stimuli IDs and pushes all the information of a single picture (full picture name, question, options, 
+   picture number) onto the array trials_like -> this way, an array with a complete list of all stimuli has been created
+   */
 for(i=0; i<30; i++) {
   trials_like.push({
     picture: "images/" + String(array_like[i]) + ".jpg",
@@ -42,9 +43,9 @@ for(i=0; i<30; i++) {
 // initialise empty array for second trial
 trials_objects = [];
 
-/* for loop for second trial:
-   traverses through all randomised stimuli images and presents the participant with
-   a rating scale for each image; pushes participant answers onto the second trial array to save them */
+/* for-loop for second trial:
+   traverses through all randomised stimuli IDS and pushes all the information of a single picture (full picture name, question, options, 
+   picture number) onto the array trials_objects -> this way, an array with a complete list of all stimuli has been created */
 for(i=0; i<30; i++) {
   trials_objects.push({
     picture: "images/" + String(array_object[i]) + ".jpg",
