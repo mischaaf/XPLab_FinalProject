@@ -19,6 +19,7 @@ $("document").ready(function() {
             rating_scale_object,
             instructions_vision,
             vision_test,
+            vision_test_2,
             ishihara,
             expert,
             post_test,
@@ -33,7 +34,7 @@ $("document").ready(function() {
             contact_email: "YOUREMAIL@wherelifeisgreat.you",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
         },
-        
+
         // generate progress bar
         progress_bar: {
             in: [

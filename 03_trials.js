@@ -32,16 +32,26 @@ const rating_scale_question = {
      }]
   }
 
-/* execute modified version of Snellen eye chart test to
+/* execute self-constructed eyesight test to
    test whether participants' shortsight is sufficient for our experiment */
   const vision_test_trial = {
     vision_test:
       [{
-          picture: "images/snellen_eye_chart.png",
-          question: "Please insert the letters from the last row you can read in the box.",
+          picture: "images/Visiontest.jpg",
+          question: "<br /> <br /> <br /> <br /> Please fill in the box with the smallest letter combination that you can read.",
           min_chars: 1
       }]
    }
+
+// execute second part of self-constructed eyesight test
+   const vision_test_2_trial = {
+     vision_test_2:
+       [{
+           picture: "images/Visiontest_2.jpg",
+           question: "<br /> <br /> <br /> <br /> Please fill in the box with the letter combination that is accentuated.",
+           min_chars: 1
+       }]
+    }
 
 // show desktop distance assistance
    const desktop_distance_trial = {
