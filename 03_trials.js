@@ -1,13 +1,14 @@
-/* initialise two trials;
-one to measure likeability
-and one to measure object detectability */
+/* initialise two trials: one to measure likeability and one to measure object detectability 
+in order to not list all the individual 60 pictures (30 for each blok of trials), we wrote functions in 01_custom_functions which
+create two arrays containing all the stimuli for the two blocks as well as all the relevant information associated with them
+the two arrays containing this information are trials_like and trials_objects*/
 const trial_info = {
     rating_scale_like: trials_like,
 
     rating_scale_object: trials_objects
   }
 
-/* the next block tests for exclusion criterions:
+/* the next block tests for exclusion criteria:
    if the given responses do not meet our predetermined requirements,
    we later on exclude the participants' data from the analysis */
 
