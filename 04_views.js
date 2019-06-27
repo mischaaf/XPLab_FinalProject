@@ -86,9 +86,7 @@ const rating_scale_like = babeViews.view_generator('rating_scale',{
 
 // initialise second trial block
 const rating_scale_object = babeViews.view_generator('rating_scale',{
-    // This will use all trials specified in `data`, you can user a smaller value (for testing), but not a larger value
       trials: trial_info.rating_scale_object.length,
-    // name and trial_type should be identical to the variable name
       name: 'rating_scale_object',
       trial_type: 'rating_scale_object',
       data: trial_info.rating_scale_object,
@@ -122,7 +120,7 @@ const vision_test = babeViews.view_generator('textbox_input', {
   data: vision_test_trial.vision_test,
 });
 
-// iniate second part of eyesight test ???
+// initiate second part of eyesight test
 const vision_test_2 = babeViews.view_generator('textbox_input', {
   trials: 1,
   name: 'vision_test_2',
