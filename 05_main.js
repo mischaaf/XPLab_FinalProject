@@ -29,7 +29,7 @@ $("document").ready(function() {
         // specification of all deployment information
         deploy: {
             experimentID: "INSERT_A_NUMBER",
-            serverAppURL: "https://babe-demo.herokuapp.com/api/submit_experiment/",
+            serverAppURL: "https://babe-backend.herokuapp.com/api/submit_experiment/70",
             deployMethod: "debug",
             contact_email: "YOUREMAIL@wherelifeisgreat.you",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
