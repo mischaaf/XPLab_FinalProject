@@ -1,0 +1,155 @@
+---
+title: "GiveMeGestalt_FinalPaper"
+output: html_document
+---
+# Excluded data: 
+# 70 subjects participated in our experiment. -> Wollen wir hier noch m/f und age ausrechnen und hinschreiben? (Können wir auch in Excel machen). -> Zahlen nochmals kontrollieren am Ende!
+
+# According to our specified exclusion criteria, the following participants had to be excluded: 4 because of rating themselves as an expert in cubism (rated as 6), 4 because they failed the Ishihara color vision test (seeing a 11, 21 or 24), 1 because of failing the general vision test and 10 because they completed the experiment in under 5 minutes of time. 1 data block was from our own test run. The analysis was therefore executed with 50 subjects.
+
+# Bayesian Analysis
+```{r}
+library(tidyverse)
+library(brms)
+library(ggplot2)
+
+# read in the filtered csv results and select the columns needed for analysis
+d = read_csv2("/Users/Mirijam/Documents/BachelorCognitiveScience/4.Semester/XPLab/Final_Project/GiveMeGestalt_Exp/GiveMeGestalt_filtered_results.csv") %>% 
+  filter(trial_name %in% c("rating_scale_object", "rating_scale_like")) %>% 
+  select(submission_id, trial_name, response, picture_nr, artist)
+
+# cast data into appropriate type
+d_wide = spread(d, key = trial_name, value = response) %>% 
+  mutate(likeability = factor(rating_scale_like, ordered = T),
+         objects = factor(paste0("C", rating_scale_object), ordered = T),
+         artist = factor(artist),
+         picture_nr = factor(picture_nr),
+         submission_id = factor(submission_id),
+         objects_forward = objects)
+
+# inspect data
+ggplot(d_wide, aes(x = objects, y= likeability)) + geom_jitter() + geom_smooth(method = "lm")
+```
+
+# Section 1: the first three models treat the object-ratings as interval-scale/ metric
+
+# We run one model as our basic analysis to examine the hypothesis from the original paper. This is the hierarchical model with only fixed effects. Additionally, we run one model with by-item (pictures) and by-subject random intercepts as well as one with by-subject random intercepts and fixed effect of artist. In this section, the data of the object ratings will be treated as interval (continous). 
+
+# hierarchical model with only fixed effects
+```{r}
+model_1 = brm(data = d_wide,
+        formula = likeability ~ as.double(objects),
+        family=cumulative("logit")
+)
+model_1
+plot(marginal_effects(model_1))
+```
+
+# hierarchical model with by-item (pictures) and by-subject random intercepts
+```{r}
+model_2 = brm(data = d_wide,
+        formula = likeability ~ as.double(objects) + (1 | picture_nr) + (1 | submission_id),
+        family=cumulative("logit")
+)
+model_2
+plot(marginal_effects(model_2))
+```
+
+# hierarchical model with by-subject random intercepts and fixed effect of artist
+```{r}
+model_3 = brm(data = d_wide,
+        formula = likeability ~ as.double(objects) + artist + (1 | submission_id),
+        family=cumulative("logit")
+)
+model_3
+plot(marginal_effects(model_3))
+```
+
+# Section 2: the second three models treat the object-ratings as ordinal using the new brms monotonic models
+
+# In this section, we run the same models as described above. The difference here is that the data of the object ratings is treated as ordinal. According to Bürkner (2019, "Estimating Monotonic Effects with brms"), the often used Likert-scales in Psychology research should be treated as ordinal instead of only treating them as continuous or as unordered categorical data out of convenience. Therefore, we use the newly included brms monotonic models for further analysis.
+
+# hierarchical model with only fixed effects
+```{r}
+model_4 = brm(data = d_wide,
+                formula = likeability ~ mo(objects),
+                family=cumulative("logit")
+)
+model_4
+plot(marginal_effects(model_4))
+```
+
+# hierarchical model with by-item (pictures) and by-subject random intercepts
+```{r}
+model_5 = brm(data = d_wide,
+                formula = likeability ~ mo(objects) + (1 | picture_nr) + (1 | submission_id),
+                family=cumulative("logit")
+)
+model_5
+plot(marginal_effects(model_5))
+```
+
+# hierarchical model with by-subject random intercepts and fixed effect of artist
+```{r}
+model_6 = brm(data = d_wide,
+                formula = likeability ~ mo(objects) + artist + (1 | submission_id),
+                family=cumulative("logit")
+)
+model_6
+plot(marginal_effects(model_6))
+```
+
+# Frequentist Analysis: Pearson correlation
+
+# As explained above in our paper, this part of the analysis is only done in order to replicate the original study very closely and to then compare our results with theirs. We use the Pearson correlation coefficient and report r, the p-value, R^2 and visualize the data in a scatterplot showing the linear regression.
+```{r}
+data <- read_csv2("/Users/Mirijam/Documents/BachelorCognitiveScience/4.Semester/XPLab/Final_Project/GiveMeGestalt_Exp/GiveMeGestalt_filtered_results.csv")
+```
+
+#load libraries
+```{r}
+library(tidyverse)
+library(ggpubr)
+```
+
+#data formatting
+```{r}
+data_temp <- as_tibble(data) %>% mutate(response = as.integer(response))
+data_temp
+
+x <- filter(data_temp, trial_name == 'rating_scale_like') %>% 
+  select(c('response', 'picture_nr'))%>% 
+  group_by(picture_nr) %>% 
+  summarise(response = mean(response))
+#x
+y <- filter(data_temp, trial_name == 'rating_scale_object') %>% 
+  select(c('response', 'picture_nr')) %>% 
+  group_by(picture_nr) %>% 
+  summarise(response = mean(response))
+#y
+
+data_formatted <- merge(x,y, by = 'picture_nr')
+#data_formatted
+```
+
+#correlation test and regression graph:
+```{r}
+ggscatter(data_formatted, x = "response.x", y = "response.y", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Detectability", ylab = "Liking")
+
+res <- cor.test(data_formatted$response.x, data_formatted$response.y, 
+                    method = "pearson")
+res
+
+#extract the p.value
+res$p.value
+
+#extract the correlation coefficient
+res$estimate
+
+#the amount of variance explained
+res$estimate^2
+```
+# The Pearson correlation coefficient is r=0.66 with p < 0.0001. The amount of variance explained is R^2 = 0.43. Relying on the common frequentist interpretation of the p-value and the fact that 0 is not included in the confidence interval, it can be said that the alternative hypothesis is supported: the true correlation is significantly different from 0. This suggests that participants liked a painting more, the easier they could detect objects in it. Our result of the frequentist analysis section corresponds to the result of the original paper. The correlation coefficient is also in the same range (r = 0.781 in the original paper). Both correlations would be labeled as a strong effect by the conventionally used classification of Cohen. 
