@@ -1,4 +1,4 @@
-# Still need to add:
+## Still need to add:
 * all R codes (analyses/code)
   * R notebook?
 * final result data (analyses/data)
@@ -6,8 +6,10 @@
 * writing 
   * prereg report
   * final report
+ * nodemodules (where to?)
+ * additional folder for license, json etc?
   
-# Have to delete:
+## Have to delete:
 * images folder
 * stimuli folder
 * stimuli folder 2
