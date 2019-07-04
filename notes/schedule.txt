@@ -1,0 +1,22 @@
+1. preparation
+- preliminary plan
+- schedule, talk to MF
+- stimuli
+- implement experiment -> babe (5 Dateien)
+- upload on Appserver
+- hosting on Netlify
+- pilot experiment, 2-3 people
+- implement statistical analyses based on debug-pilot data
+- preregistration report - analysis scripts
+- wait for MF
+2. experiment 
+3. analysis in R
+4. paper
+
+ABGABEN:
+Netlify link
+CSV Datei
+R Code
+R Analyse
+Preregistration Report (mit altem Datum!)
+Paper
