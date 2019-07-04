@@ -5,7 +5,7 @@
 * experiments???
 * writing 
   * prereg report
-  * final report
+  * final report R Markdown -> images reinschreiben? 
  * nodemodules (where to?)
  * additional folder for license, json etc?
   
