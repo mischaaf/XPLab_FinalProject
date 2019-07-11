@@ -11,6 +11,7 @@ output: html_document
 library(tidyverse)
 library(brms)
 library(ggplot2)
+library(ggpubr)
 
 # read in the filtered csv results and select the columns needed for analysis
 d = read_csv2("/Users/Mirijam/Documents/BachelorCognitiveScience/4.Semester/XPLab/Final_Project/GiveMeGestalt_Exp/GiveMeGestalt_filtered_results.csv") %>% 
@@ -28,6 +29,14 @@ d_wide = spread(d, key = trial_name, value = response) %>%
 
 # inspect data
 ggplot(d_wide, aes(x = objects, y= likeability)) + geom_jitter() + geom_smooth(method = "lm")
+
+# further visual display of data
+a <- ggplot(data=d2)+
+  geom_bar(mapping= aes(x = trial_name, fill = response), position = "dodge")
+
+b <- ggplot(data=d2)+
+  geom_bar(mapping= aes(x = trial_name, fill = response))+
+  facet_wrap(~artist)
 ```
 
 # Section 1: the first three models treat the object-ratings as interval-scale/ metric
@@ -97,18 +106,18 @@ model_6 = brm(data = d_wide,
 model_6
 plot(marginal_effects(model_6), categorical = T)
 ```
+##Model comparison
+```{r}
+##We have now fitted three different ordinal models and the question naturally arises: Which model should we choose, and base our inference on?
+loo <- loo(model_1, model_2, model_3, model_4, model_5, model_6)
+loo
+```
 
 # Frequentist Analysis: Pearson correlation
 
 # As explained above in our paper, this part of the analysis is only done in order to replicate the original study very closely and to then compare our results with theirs. We use the Pearson correlation coefficient and report r, the p-value, R^2 and visualize the data in a scatterplot showing the linear regression.
 ```{r}
 data <- read_csv2("/Users/Mirijam/Documents/BachelorCognitiveScience/4.Semester/XPLab/Final_Project/GiveMeGestalt_Exp/GiveMeGestalt_filtered_results.csv")
-```
-
-#load libraries
-```{r}
-library(tidyverse)
-library(ggpubr)
 ```
 
 #data formatting
