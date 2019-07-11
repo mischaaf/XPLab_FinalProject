@@ -3,7 +3,7 @@ title: "GiveMeGestalt_FinalPaper"
 output: html_document
 ---
 # Excluded data: 
-# 70 subjects participated in our experiment. -> Wollen wir hier noch m/f und age ausrechnen und hinschreiben? (Können wir auch in Excel machen). -> Zahlen nochmals kontrollieren am Ende!
+# 70 subjects participated in our experiment. -> Wollen wir hier noch m/f und age ausrechnen und hinschreiben? -> Zahlen nochmals kontrollieren am Ende!
 
 # According to our specified exclusion criteria, the following participants had to be excluded: 4 because of rating themselves as an expert in cubism (rated as 6), 4 because they failed the Ishihara color vision test (seeing a 11, 21 or 24), 1 because of failing the general vision test and 10 because they completed the experiment in under 5 minutes of time. 1 data block was from our own test run. The analysis was therefore executed with 50 subjects.
 
@@ -76,7 +76,7 @@ model_4 = brm(data = d_wide,
                 family=cumulative("logit")
 )
 model_4
-plot(marginal_effects(model_4))
+plot(marginal_effects(model_4), categorical = T)
 ```
 
 # hierarchical model with by-item (pictures) and by-subject random intercepts
@@ -86,7 +86,7 @@ model_5 = brm(data = d_wide,
                 family=cumulative("logit")
 )
 model_5
-plot(marginal_effects(model_5))
+plot(marginal_effects(model_5), categorical = T)
 ```
 
 # hierarchical model with by-subject random intercepts and fixed effect of artist
@@ -96,7 +96,7 @@ model_6 = brm(data = d_wide,
                 family=cumulative("logit")
 )
 model_6
-plot(marginal_effects(model_6))
+plot(marginal_effects(model_6), categorical = T)
 ```
 
 # Frequentist Analysis: Pearson correlation
