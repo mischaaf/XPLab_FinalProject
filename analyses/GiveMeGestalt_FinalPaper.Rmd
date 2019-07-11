@@ -39,73 +39,74 @@ b <- ggplot(data=d2)+
   facet_wrap(~artist)
 ```
 
-# Section 1: the first three models treat the object-ratings as interval-scale/ metric
-
-# We run one model as our basic analysis to examine the hypothesis from the original paper. This is the hierarchical model with only fixed effects. Additionally, we run one model with by-item (pictures) and by-subject random intercepts as well as one with by-subject random intercepts and fixed effect of artist. In this section, the data of the object ratings will be treated as interval (continous). 
-
-# hierarchical model with only fixed effects
-```{r}
-model_1 = brm(data = d_wide,
-        formula = likeability ~ as.double(objects),
-        family=cumulative("logit")
-)
-model_1
-plot(marginal_effects(model_1))
-```
-
-# hierarchical model with by-item (pictures) and by-subject random intercepts
-```{r}
-model_2 = brm(data = d_wide,
-        formula = likeability ~ as.double(objects) + (1 | picture_nr) + (1 | submission_id),
-        family=cumulative("logit")
-)
-model_2
-plot(marginal_effects(model_2))
-```
-
-# hierarchical model with by-subject random intercepts and fixed effect of artist
-```{r}
-model_3 = brm(data = d_wide,
-        formula = likeability ~ as.double(objects) + artist + (1 | submission_id),
-        family=cumulative("logit")
-)
-model_3
-plot(marginal_effects(model_3))
-```
-
-# Section 2: the second three models treat the object-ratings as ordinal using the new brms monotonic models
+# Section 1: the first three models treat the object-ratings as ordinal using the new brms monotonic models
 
 # In this section, we run the same models as described above. The difference here is that the data of the object ratings is treated as ordinal. According to Bürkner (2019, "Estimating Monotonic Effects with brms"), the often used Likert-scales in Psychology research should be treated as ordinal instead of only treating them as continuous or as unordered categorical data out of convenience. Therefore, we use the newly included brms monotonic models for further analysis.
 
 # hierarchical model with only fixed effects
 ```{r}
-model_4 = brm(data = d_wide,
+model_1 = brm(data = d_wide,
                 formula = likeability ~ mo(objects),
                 family=cumulative("logit")
 )
+model_1
+plot(marginal_effects(model_1), categorical = T)
+```
+
+# hierarchical model with by-item (pictures) and by-subject random intercepts
+```{r}
+model_2 = brm(data = d_wide,
+                formula = likeability ~ mo(objects) + (1 | picture_nr) + (1 | submission_id),
+                family=cumulative("logit")
+)
+model_2
+plot(marginal_effects(model_2), categorical = T)
+```
+
+# hierarchical model with by-subject random intercepts and fixed effect of artist
+```{r}
+model_3 = brm(data = d_wide,
+                formula = likeability ~ mo(objects) + artist + (1 | submission_id),
+                family=cumulative("logit")
+)
+model_3
+plot(marginal_effects(model_3), categorical = T)
+```
+
+# Section 2: the second three models treat the object-ratings as interval-scale/ metric
+
+# We run one model as our basic analysis to examine the hypothesis from the original paper. This is the hierarchical model with only fixed effects. Additionally, we run one model with by-item (pictures) and by-subject random intercepts as well as one with by-subject random intercepts and fixed effect of artist. In this section, the data of the object ratings will be treated as interval (continous). 
+
+# hierarchical model with only fixed effects
+```{r}
+model_4 = brm(data = d_wide,
+        formula = likeability ~ as.double(objects),
+        family=cumulative("logit")
+)
 model_4
-plot(marginal_effects(model_4), categorical = T)
+plot(marginal_effects(model_4))
 ```
 
 # hierarchical model with by-item (pictures) and by-subject random intercepts
 ```{r}
 model_5 = brm(data = d_wide,
-                formula = likeability ~ mo(objects) + (1 | picture_nr) + (1 | submission_id),
-                family=cumulative("logit")
+        formula = likeability ~ as.double(objects) + (1 | picture_nr) + (1 | submission_id),
+        family=cumulative("logit")
 )
 model_5
-plot(marginal_effects(model_5), categorical = T)
+plot(marginal_effects(model_5))
 ```
 
 # hierarchical model with by-subject random intercepts and fixed effect of artist
 ```{r}
 model_6 = brm(data = d_wide,
-                formula = likeability ~ mo(objects) + artist + (1 | submission_id),
-                family=cumulative("logit")
+        formula = likeability ~ as.double(objects) + artist + (1 | submission_id),
+        family=cumulative("logit")
 )
 model_6
-plot(marginal_effects(model_6), categorical = T)
+plot(marginal_effects(model_6))
 ```
+
 ##Model comparison
 ```{r}
 ##We have now fitted three different ordinal models and the question naturally arises: Which model should we choose, and base our inference on?
@@ -117,7 +118,7 @@ loo
 
 # As explained above in our paper, this part of the analysis is only done in order to replicate the original study very closely and to then compare our results with theirs. We use the Pearson correlation coefficient and report r, the p-value, R^2 and visualize the data in a scatterplot showing the linear regression.
 ```{r}
-data <- read_csv2("/Users/Mirijam/Documents/BachelorCognitiveScience/4.Semester/XPLab/Final_Project/GiveMeGestalt_Exp/GiveMeGestalt_filtered_results.csv")
+data <- read_csv2("GiveMeGestalt_filtered_results.csv")
 ```
 
 #data formatting
