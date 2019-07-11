@@ -50,28 +50,28 @@ plot(marginal_effects(model_3))
 # *****Section 2: the second three models treat the object-ratings as ordinal using the new brms monotonic models*****
 
 # hierarchical model with only fixed effects
-model_4 = brm(data = d_wide2,
+model_4 = brm(data = d_wide,
                 formula = likeability ~ mo(objects),
                 family=cumulative("logit")
 )
 model_4
-plot(marginal_effects(model_4))
+plot(marginal_effects(model_4), categorical = T)
 
 
 # hierarchical model with by-item (pictures) and by-subject random intercepts
-model_5 = brm(data = d_wide2,
+model_5 = brm(data = d_wide,
                 formula = likeability ~ mo(objects) + (1 | picture_nr) + (1 | submission_id),
                 family=cumulative("logit")
 )
 model_5
-plot(marginal_effects(model_5))
+plot(marginal_effects(model_5), categorical = T)
 
 
 # hierarchical model with by-subject random intercepts and fixed effect of artist
-model_6 = brm(data = d_wide2,
+model_6 = brm(data = d_wide,
                 formula = likeability ~ mo(objects) + artist + (1 | submission_id),
                 family=cumulative("logit")
 )
 model_6
-plot(marginal_effects(model_6))
+plot(marginal_effects(model_6), categorical = T)
 
