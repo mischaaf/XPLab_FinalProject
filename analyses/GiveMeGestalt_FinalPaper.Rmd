@@ -3,7 +3,7 @@ title: "GiveMeGestalt_FinalPaper"
 output: html_document
 ---
 # Excluded data: 
-# 70 subjects participated in our experiment. 35 females and 15 males participated. The average age for females is 24.49 and the average age for men is 25.26.
+# 70 subjects participated in our experiment. 35 females and 15 males participated. The average age for females is 24.49 and the average age for men is 25.26. The overall average age is 24.7.
 # According to our specified exclusion criteria, the following participants had to be excluded: 387, 374, 338, 330  because of rating themselves as an expert in cubism (rated as 6); 376, 368, 362 and 346 because they failed the Ishihara color vision test (seeing a 11, 21 or 24); 333 because of failing the general vision test and 380, 364, 357, 350, 345, 343, 342, 340, 354 and 355 because they completed the experiment in under 5 minutes of time. 1 data block (326) was from our own test run. The analysis was therefore executed with 50 subjects.
 
 # Bayesian Analysis
