@@ -29,14 +29,22 @@ d_wide = spread(d, key = trial_name, value = response) %>%
 
 # inspect data
 ggplot(d_wide, aes(x = objects, y= likeability)) + geom_jitter() + geom_smooth(method = "lm")
-
-# further visual display of data
-a <- ggplot(data=d2)+
+```
+# further visual display of the data
+```{r}
+# absolute frequency of likeability and detecting objects
+a <- ggplot(data=d)+
   geom_bar(mapping= aes(x = trial_name, fill = response), position = "dodge")
+a
+```
 
-b <- ggplot(data=d2)+
+
+```{r}
+# absolute frequency of likeability and detecting objects regarding the artists
+b <- ggplot(data=d)+
   geom_bar(mapping= aes(x = trial_name, fill = response))+
   facet_wrap(~artist)
+b
 ```
 
 # Section 1: the first three models treat the object-ratings as ordinal using the new brms monotonic models
