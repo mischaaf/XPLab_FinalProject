@@ -26,7 +26,7 @@ d_wide = spread(d, key = trial_name, value = response) %>%
 # inspect data
 ggplot(d_wide, aes(x = objects, y= likeability)) + geom_jitter() + geom_smooth(method = "lm")
 ```
-### Visual display of the data
+#### Visual display of the data
 ```{r}
 # absolute frequency of likeability and detecting objects
 a <- ggplot(data=d)+
@@ -43,9 +43,9 @@ b
 ```
 
 ## Section 1: 
-### the first three models treat the object-ratings as ordinal using the new brms monotonic models
+### The first three models treat the object-ratings as ordinal using the new brms monotonic models
 
-### Hierarchical model with only fixed effects
+#### Hierarchical model with only fixed effects
 ```{r}
 model_1 = brm(data = d_wide,
                 formula = likeability ~ mo(objects),
@@ -57,7 +57,7 @@ model_1
 plot(marginal_effects(model_1), categorical = T)
 ```
 
-### Hierarchical model with by-item (pictures) and by-subject random intercepts
+#### Hierarchical model with by-item (pictures) and by-subject random intercepts
 ```{r}
 model_2 = brm(data = d_wide,
                 formula = likeability ~ mo(objects) + (1 | picture_nr) + (1 | submission_id),
@@ -69,7 +69,7 @@ model_2
 plot(marginal_effects(model_2), categorical = T)
 ```
 
-### Hierarchical model with by-subject random intercepts and fixed effect of artist
+#### Hierarchical model with by-subject random intercepts and fixed effect of artist
 ```{r}
 model_3 = brm(data = d_wide,
                 formula = likeability ~ mo(objects) + artist + (1 | submission_id),
@@ -82,9 +82,9 @@ plot(marginal_effects(model_3), categorical = T)
 ```
 
 ## Section 2: 
-### the following three models treat the object-ratings as interval-scale/ metric
+### The following three models treat the object-ratings as interval-scale/ metric
 
-### Hierarchical model with only fixed effects
+#### Hierarchical model with only fixed effects
 ```{r}
 model_4 = brm(data = d_wide,
         formula = likeability ~ as.double(objects),
@@ -96,7 +96,7 @@ model_4
 plot(marginal_effects(model_4))
 ```
 
-### Hierarchical model with by-item (pictures) and by-subject random intercepts
+#### Hierarchical model with by-item (pictures) and by-subject random intercepts
 ```{r}
 model_5 = brm(data = d_wide,
         formula = likeability ~ as.double(objects) + (1 | picture_nr) + (1 | submission_id),
@@ -108,7 +108,7 @@ model_5
 plot(marginal_effects(model_5))
 ```
 
-### Hierarchical model with by-subject random intercepts and fixed effect of artist
+#### Hierarchical model with by-subject random intercepts and fixed effect of artist
 ```{r}
 model_6 = brm(data = d_wide,
         formula = likeability ~ as.double(objects) + artist + (1 | submission_id),
@@ -131,7 +131,7 @@ loo
 data <- read_csv2("GiveMeGestalt_filtered_results.csv")
 ```
 
-### Data formatting
+#### Data formatting
 ```{r}
 data_temp <- as_tibble(data) %>% mutate(response = as.integer(response))
 
@@ -148,7 +148,7 @@ y <- filter(data_temp, trial_name == 'rating_scale_object') %>%
 data_formatted <- merge(x,y, by = 'picture_nr')
 ```
 
-### Correlation test and regression graph
+#### Correlation test and regression graph
 ```{r}
 ggscatter(data_formatted, x = "response.x", y = "response.y", 
           add = "reg.line", conf.int = TRUE, 
