@@ -4,7 +4,7 @@ output: html_document
 ---
 # Excluded data: 
 # 70 subjects participated in our experiment. 35 females and 15 males participated. The average age for females is 24.49 and the average age for men is 25.26. The overall average age is 24.7.
-# According to our specified exclusion criteria, the following participants had to be excluded: 387, 374, 338, 330  because of rating themselves as an expert in cubism (rated as 6); 376, 368, 362 and 346 because they failed the Ishihara color vision test (seeing a 11, 21 or 24); 333 because of failing the general vision test and 380, 364, 357, 350, 345, 343, 342, 340, 354 and 355 because they completed the experiment in under 5 minutes of time. 1 data block (326) was from our own test run. The analysis was therefore executed with 50 subjects.
+# According to our specified exclusion criteria, the following participants had to be excluded: 387, 374, 338 and 330  because of rating themselves as an expert in cubism (rated as 6); 376, 368, 362 and 346 because they failed the Ishihara colour vision test (seeing a 11, 21 or 24); 333 because of failing the general vision test and 380, 364, 357, 350, 345, 343, 342, 340, 354 and 355 because they completed the experiment in under 5 minutes of time. 1 data block (326) was from our own test run. The analysis was therefore executed with 50 subjects.
 
 # Bayesian Analysis
 ```{r}
@@ -81,7 +81,7 @@ model_3
 plot(marginal_effects(model_3), categorical = T)
 ```
 
-# Section 2: the second three models treat the object-ratings as interval-scale/ metric
+# Section 2: the following three models treat the object-ratings as interval-scale/ metric
 
 # We run one model as our basic analysis to examine the hypothesis from the original paper. This is the hierarchical model with only fixed effects. Additionally, we run one model with by-item (pictures) and by-subject random intercepts as well as one with by-subject random intercepts and fixed effect of artist. In this section, the data of the object ratings will be treated as interval (continous). 
 
@@ -124,7 +124,7 @@ loo
 
 # Frequentist Analysis: Pearson correlation
 
-# As explained above in our paper, this part of the analysis is only done in order to replicate the original study very closely and to then compare our results with theirs. We use the Pearson correlation coefficient and report r, the p-value, R^2 and visualize the data in a scatterplot showing the linear regression.
+# As explained above in our paper, this part of the analysis is only done in order to replicate the original study very closely and to then compare our results with theirs. We use the Pearson correlation coefficient and report r, the p-value, R^2 and visualise the data in a scatterplot showing the linear regression.
 ```{r}
 data <- read_csv2("GiveMeGestalt_filtered_results.csv")
 ```
@@ -169,4 +169,4 @@ res$estimate
 #the amount of variance explained
 res$estimate^2
 ```
-# The Pearson correlation coefficient is r=0.66 with p < 0.0001. The amount of variance explained is R^2 = 0.43. Relying on the common frequentist interpretation of the p-value and the fact that 0 is not included in the confidence interval, it can be said that the alternative hypothesis is supported: the true correlation is significantly different from 0. This suggests that participants liked a painting more, the easier they could detect objects in it. Our result of the frequentist analysis section corresponds to the result of the original paper. The correlation coefficient is also in the same range (r = 0.781 in the original paper). Both correlations would be labeled as a strong effect by the conventionally used classification of Cohen. 
+# The Pearson correlation coefficient is r=0.66 with p < 0.0001. The amount of variance explained is R^2 = 0.43. Relying on the common frequentist interpretation of the p-value and the fact that 0 is not included in the confidence interval, it can be said that the alternative hypothesis is supported: the true correlation is significantly different from 0. This suggests that participants liked a painting more, when they were able to detect objects in it more easily. Our result of the frequentist analysis section corresponds to the result of the original paper. The correlation coefficient is also in the same range (r = 0.781 in the original paper). Both correlations would be labeled as a strong effect by the conventionally used classification of Cohen. 
