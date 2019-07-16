@@ -166,4 +166,3 @@ res$estimate
 # the amount of variance explained
 res$estimate^2
 ```
-The Pearson correlation coefficient is r=0.66 with p < 0.0001. The amount of variance explained is R^2^ = 0.43. Relying on the common frequentist interpretation of the p-value and the fact that 0 is not included in the confidence interval, it can be said that the alternative hypothesis is supported: the true correlation is significantly different from 0. This suggests that participants liked a painting more, when they were able to detect objects in it more easily. Our result of the frequentist analysis section corresponds to the result of the original paper. The correlation coefficient is also in the same range (r = 0.781 in the original paper). Both correlations would be labeled as a strong effect by the conventionally used classification of Cohen. 
