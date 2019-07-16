@@ -52,6 +52,8 @@ model_1 = brm(data = d_wide,
                 family=cumulative("logit")
 )
 model_1
+```
+```{r}
 plot(marginal_effects(model_1), categorical = T)
 ```
 
@@ -62,6 +64,8 @@ model_2 = brm(data = d_wide,
                 family=cumulative("logit")
 )
 model_2
+```
+```{r}
 plot(marginal_effects(model_2), categorical = T)
 ```
 
@@ -72,6 +76,8 @@ model_3 = brm(data = d_wide,
                 family=cumulative("logit")
 )
 model_3
+```
+```{r}
 plot(marginal_effects(model_3), categorical = T)
 ```
 
@@ -85,6 +91,8 @@ model_4 = brm(data = d_wide,
         family=cumulative("logit")
 )
 model_4
+``` 
+```{r}
 plot(marginal_effects(model_4))
 ```
 
@@ -95,6 +103,8 @@ model_5 = brm(data = d_wide,
         family=cumulative("logit")
 )
 model_5
+```
+```{r}
 plot(marginal_effects(model_5))
 ```
 
@@ -105,6 +115,8 @@ model_6 = brm(data = d_wide,
         family=cumulative("logit")
 )
 model_6
+```
+```{r}
 plot(marginal_effects(model_6))
 ```
 
@@ -122,21 +134,18 @@ data <- read_csv2("GiveMeGestalt_filtered_results.csv")
 ### Data formatting
 ```{r}
 data_temp <- as_tibble(data) %>% mutate(response = as.integer(response))
-data_temp
 
 x <- filter(data_temp, trial_name == 'rating_scale_like') %>% 
   select(c('response', 'picture_nr'))%>% 
   group_by(picture_nr) %>% 
   summarise(response = mean(response))
-# x
+
 y <- filter(data_temp, trial_name == 'rating_scale_object') %>% 
   select(c('response', 'picture_nr')) %>% 
   group_by(picture_nr) %>% 
   summarise(response = mean(response))
-# y
 
 data_formatted <- merge(x,y, by = 'picture_nr')
-# data_formatted
 ```
 
 ### Correlation test and regression graph
