@@ -3,7 +3,7 @@ library(tidyverse)
 library(ggpubr)
 
 # read in the csv results
-data <- read_csv2("GiveMeGestalt_filtered_results.csv")
+data <- read_csv2("XPLab_FinalProject/tree/master/data/main/GiveMeGestalt_filtered_results.csv")
 
 # transform the data into the needed format
 data_temp <- as_tibble(data) %>% mutate(response = as.integer(response))
