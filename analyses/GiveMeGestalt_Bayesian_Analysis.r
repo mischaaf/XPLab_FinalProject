@@ -4,7 +4,7 @@ library(brms)
 library(ggplot2)
 
 # read in the csv results and select the needed columns
-d = read_csv2("GiveMeGestalt_filtered_results.csv") %>% 
+d = read_csv2("XPLab_FinalProject/tree/master/data/main/GiveMeGestalt_filtered_results.csv") %>% 
   filter(trial_name %in% c("rating_scale_object", "rating_scale_like")) %>% 
   select(submission_id, trial_name, response, picture_nr, artist)
 
