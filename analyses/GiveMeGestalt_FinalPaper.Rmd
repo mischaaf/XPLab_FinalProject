@@ -45,8 +45,6 @@ b
 ## Section 1: 
 ### the first three models treat the object-ratings as ordinal using the new brms monotonic models
 
-In this section, we run the same models as described above. The difference here is that the data of the object ratings is treated as ordinal. According to Bürkner (2019, "Estimating Monotonic Effects with brms"), the often used Likert-scales in Psychology research should be treated as ordinal instead of only treating them as continuous or as unordered categorical data out of convenience. Therefore, we use the newly included brms monotonic models for further analysis.
-
 ### Hierarchical model with only fixed effects
 ```{r}
 model_1 = brm(data = d_wide,
@@ -80,8 +78,6 @@ plot(marginal_effects(model_3), categorical = T)
 ## Section 2: 
 ### the following three models treat the object-ratings as interval-scale/ metric
 
-We run one model as our basic analysis to examine the hypothesis from the original paper. This is the hierarchical model with only fixed effects. Additionally, we run one model with by-item (pictures) and by-subject random intercepts as well as one with by-subject random intercepts and fixed effect of artist. In this section, the data of the object ratings will be treated as interval (continous). 
-
 ### Hierarchical model with only fixed effects
 ```{r}
 model_4 = brm(data = d_wide,
@@ -113,15 +109,12 @@ plot(marginal_effects(model_6))
 ```
 
 ## Model comparison
-We have now fitted three different ordinal models and the question naturally arises: Which model should we choose, and base our inference on?
 ```{r}
 loo <- loo(model_1, model_2, model_3, model_4, model_5, model_6)
 loo
 ```
 
 ## Frequentist Analysis: Pearson correlation
-
-As explained above in our paper, this part of the analysis is only done in order to replicate the original study very closely and to then compare our results with theirs. We use the Pearson correlation coefficient and report r, the p-value, R^2^ and visualise the data in a scatterplot showing the linear regression.
 ```{r}
 data <- read_csv2("GiveMeGestalt_filtered_results.csv")
 ```
