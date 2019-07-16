@@ -30,7 +30,7 @@ b <- ggplot(data=d)+
   facet_wrap(~artist)
 b
 
-# *****Section 1: the second three models treat the object-ratings as ordinal using the new brms monotonic models*****
+# *****Section 1: the following three models treat the object-ratings as ordinal using the new brms monotonic models*****
 
 # hierarchical model with only fixed effects
 model_1 = brm(data = d_wide,
@@ -38,7 +38,7 @@ model_1 = brm(data = d_wide,
                 family=cumulative("logit")
 )
 model_1
-plot(marginal_effects(model_1), categorcial = T)
+plot(marginal_effects(model_1), categorical = T)
 
 
 # hierarchical model with by-item (pictures) and by-subject random intercepts
