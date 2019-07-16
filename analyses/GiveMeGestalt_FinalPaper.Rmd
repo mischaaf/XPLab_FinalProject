@@ -10,7 +10,7 @@ library(ggplot2)
 library(ggpubr)
 
 # read in the filtered csv results and select the columns needed for analysis
-d = read_csv2("/Users/Mirijam/Documents/BachelorCognitiveScience/4.Semester/XPLab/Final_Project/GiveMeGestalt_Exp/GiveMeGestalt_filtered_results.csv") %>% 
+d = read_csv2("XPLab_FinalProject/tree/master/data/main/GiveMeGestalt_filtered_results.csv") %>% 
   filter(trial_name %in% c("rating_scale_object", "rating_scale_like")) %>% 
   select(submission_id, trial_name, response, picture_nr, artist)
 
