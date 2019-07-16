@@ -18,5 +18,5 @@ Netlify link
 CSV Datei
 R Code
 R Analyse
-Preregistration Report (mit altem Datum!)
+Preregistration Report
 Paper
